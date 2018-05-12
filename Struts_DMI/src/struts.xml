@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+    <!--DMI动态方法调用:http://localhost:8080/index!add-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
+    <package name="index" extends="struts-default" namespace="/" >
+        <action name="index" class="com.myself.IndexAction">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+
+        <!--通配符:约束先于配置
+        <action name="*_*" class="com.myselft.{1}" method="{2}">
+            <result name="success">
+                /{1}_{2}.jsp
+            </result>
+        </action>
+        -->
+    </package>
+
+</struts>

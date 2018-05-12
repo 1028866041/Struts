@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+    <package name="index" extends="struts-default" namespace="/" >
+        <action name="login*" class="com.myself.element.UserLogin{1}" method="login">
+            <result name="success">
+                /user_success.jsp
+            </result>
+            <result name="error">
+                /user_error.jsp
+            </result>
+        </action>
+
+    </package>
+
+    <package name="defaultpage" extends="index" namespace="/default">
+
+        <global-results>
+            <result name="defaultpage">/user_success.jsp</result>
+        </global-results>
+        <!--对action指定class值栈中才有${r}-->
+        <action name="defaultpage" class="com.myself.md.UserModelDriven">
+           <!-- <result >/user_error.jsp</result>-->
+            <!--<result type="redirect">${r}?t=${t}</result>-->
+
+            <!--若Action重定向到jsp则值栈无值只能从ActionContext:para中取-->
+            <result type="redirect">
+                <param name="location">${r}?t=${type}</param>
+            </result>
+
+        </action>
+    </package>
+
+</struts>
